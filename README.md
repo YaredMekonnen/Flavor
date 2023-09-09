@@ -39,7 +39,7 @@ Before running the application, ensure that you have the following software inst
 2. Navigate to the project directory:
 
    ```shell
-    cd recipe-website
+    cd flavor
    ```
 
 3. Install the dependencies:

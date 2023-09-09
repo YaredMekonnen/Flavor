@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <Link to={Routes.HOME}>
       <div className="mb-2">
-        <h1 className="text-3xl font-bold text-primary-400">CokBok</h1>
+        <h1 className="text-3xl font-bold text-primary-400">Flavor</h1>
       </div>
     </Link>
   );
