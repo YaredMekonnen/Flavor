@@ -5,96 +5,66 @@ import {
   Steps,
   Nutritions,
   Comments,
+  RateRecipe,
 } from "./components";
+import { LoadingSpinner } from "../../../components";
+import { getRecipeDetailAction } from "../../../store/actions";
+
+import { useParams } from "react-router";
+import { useEffect } from "react";
+import useHttp from "../../../hooks/useHttp";
+import { useDispatch, useSelector } from "react-redux";
+import { StateInterface } from "../../../store";
+import { AnyAction } from "redux";
 
 const RecipeDetail = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams<{ id: string }>();
+  const { loading, recipe } = useSelector(
+    (state: StateInterface) => state.recipeDetail
+  );
+  const { sendRequest: getRecipe } = useHttp();
+
+  useEffect(() => {
+    dispatch(getRecipeDetailAction(getRecipe, id!) as unknown as AnyAction);
+  }, [id]);
+
   return (
-    <div className="flex flex-col justify-center items-center">
-      <RecipeDetailHeader />
-      <RecipeDetailNumbers />
-      <div className="flex justify-between w-full">
-        <div>
-          <Ingredients
-            ingredients={[
-              "1 loaf French bread, cut into 1-inch cubes",
-              "8 ounces cream cheese, softened",
-              "1 cup sliced fresh strawberries",
-              "12 eggs",
-              "2 cups milk",
-              "1/3 cup maple syrup",
-              "1 teaspoon vanilla extract",
-              "1/2 teaspoon ground cinnamon",
-            ]}
-          />
+    <div>
+      {!loading && recipe && (
+        <div className=" flex flex-col w-full max-w-screen-lg mx-auto px-4 space-y-8 lg:px-0 items-center">
+          <RecipeDetailHeader />
+          <RecipeDetailNumbers />
+          <div className="flex flex-col-reverse justify-between w-full items-center space-x-4 md:flex-row md:space-x-4 lg:items-start lg:space-x-8">
+            <Ingredients />
+
+            <Nutritions
+              nutritions={[
+                {
+                  title: "Calories",
+                  amount: 452,
+                },
+                {
+                  title: "Fat",
+                  amount: 12,
+                },
+                {
+                  title: "Protein",
+                  amount: 12,
+                },
+                {
+                  title: "Carbohydrates",
+                  amount: 12,
+                },
+              ]}
+            />
+          </div>
+          <Steps />
+          <RateRecipe />
+          <Comments />
         </div>
-        <div>
-          <Nutritions
-            nutritions={[
-              {
-                title: "Calories",
-                amount: 452,
-              },
-              {
-                title: "Fat",
-                amount: 12,
-              },
-              {
-                title: "Protein",
-                amount: 12,
-              },
-              {
-                title: "Carbohydrates",
-                amount: 12,
-              },
-            ]}
-          />
-        </div>
-      </div>
-      <Steps
-        steps={[
-          {
-            title: "Melt butter",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem ",
-          },
-          {
-            title: "Add bread",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.",
-          },
-          {
-            title: "Melt butter",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem ",
-          },
-          {
-            title: "Add bread",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.",
-          },
-          {
-            title: "Melt butter",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem ",
-          },
-          {
-            title: "Add bread",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.",
-          },
-          {
-            title: "Melt butter",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum. Lorem ",
-          },
-          {
-            title: "Add bread",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum.",
-          },
-        ]}
-      />
-      <Comments />
+      )}
+      {loading && <LoadingSpinner />}
     </div>
   );
 };

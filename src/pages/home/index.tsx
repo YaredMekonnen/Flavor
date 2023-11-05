@@ -1,19 +1,23 @@
-import SectionTitle from "../../components/SectionTitle";
-import HorizontalScroll from "../../components/HorizontalScroll";
-
-import { NewsLetter, Hero } from "./components";
-import { CategoriesSections } from "../categories/components";
+import {
+  NewsLetter,
+  Hero,
+  FeaturedSection,
+  PopularCategories,
+  Testimonials,
+  RecentRecipes,
+  TopRated,
+} from "./components";
 
 const HomePage = () => {
   return (
-    <div className="w-full">
-      <Hero></Hero>
-      <div className="w-full">
-        <SectionTitle any="Recent Posts" />
-        <HorizontalScroll />
-      </div>
+    <div className="w-full h-full">
+      <Hero />
+      <FeaturedSection />
+      <TopRated />
       <NewsLetter />
-      <CategoriesSections />
+      <PopularCategories />
+      <Testimonials />
+      <RecentRecipes />
     </div>
   );
 };

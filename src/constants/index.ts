@@ -1,5 +1,12 @@
 const constants = {
   API_URL: "http://localhost:5000/api/v1",
+  profilePlaceholder:
+    "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
+
+  imagePlaceholder:
+    "https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-picture-icon-png-image_695350.jpg",
+  categoryImagePlaceholder:
+    "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 
   //RECIPE TAGS
   TAGS: [
